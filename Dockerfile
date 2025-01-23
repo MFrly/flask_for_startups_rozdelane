@@ -1,29 +1,22 @@
-# Použití základního Python image
-FROM python:3.12-slim
+# Základní image s Pythonem
+FROM python:3.9-slim
 
-# Instalace základních nástrojů pro kompilaci
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    gcc \
-    libffi-dev \
-    && rm -rf /var/lib/apt/lists/*
-
-# Nastavení pracovního adresáře
+# Nastavení pracovního adresáře v kontejneru
 WORKDIR /app
 
-# Kopírování požadavků a jejich instalace
+# Kopírování požadavků (requirements.txt) a jejich instalace
 COPY requirements.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Kopírování aplikace do kontejneru
+# Kopírování zbytku aplikace do pracovního adresáře
 COPY . .
 
-# Nastavení prostředí pro Flask
+# Nastavení proměnné prostředí pro Flask
+ENV FLASK_APP=app.py
 ENV FLASK_RUN_HOST=0.0.0.0
-ENV FLASK_RUN_PORT=5000
 
-# Exponování portu
+# Expozice portu (defaultní Flask port je 5000)
 EXPOSE 5000
 
-# Spuštění aplikace
+# Příkaz pro spuštění aplikace
 CMD ["flask", "run"]
