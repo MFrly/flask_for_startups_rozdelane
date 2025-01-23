@@ -3,12 +3,23 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-  <h3>Log in</h3>
-  <form method="POST" id='login-form'>
-    {{ form.hidden_tag() }}
-    {{ render_input_field(form.name) }}
-    {{ render_input_field(form.surename) }}
-    {{ render_submit() }}
-  </form>
-  <br>
+<div class="container d-flex kontejner">
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h3 class="mb-0">Log In</h3>
+        </div>
+        <div class="card-body">
+            <form method="POST" id='login-form'>
+                {{ form.hidden_tag() }}
+                {{ render_input_field(form.name, lc="col-sm-3", rc="col-sm-9") }}
+                {{ render_input_field(form.surename, lc="col-sm-3", rc="col-sm-9") }}
+                <div class="form-group row">
+                    <div class="col-sm-9 offset-sm-3">
+                        {{ render_submit(cls="btn btn-primary") }}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}
