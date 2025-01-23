@@ -1,9 +1,27 @@
-<html>
-    <head>
-        <title>Welcome to Flask for Startups</title>
-        <link rel= "stylesheet" type= "text/css" href="{{ url_for('static',filename='styles/sakura.css') }}">
-    </head>
-    <body>
-    {% block content %}{% endblock %}
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Application Dashboard{% endblock %}</title>
+    <!-- Přidání Tailwind CSS jako alternativy -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.2.7/dist/tailwind.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/custom.css') }}" rel="stylesheet">
+    {% block head %}{% endblock %}
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <header class="bg-blue-600 text-white py-4">
+        <div class="container mx-auto text-center">
+            <h1 class="text-2xl font-bold">{% block header %}Welcome to the App{% endblock %}</h1>
+        </div>
+    </header>
+    <main class="container mx-auto mt-8 px-4">
+        {% block content %}{% endblock %}
+    </main>
+    <footer class="bg-gray-800 text-gray-200 py-4 mt-8">
+        <div class="text-center">
+            {% block footer %}© 2025 My Application{% endblock %}
+        </div>
+    </footer>
+</body>
 </html>
